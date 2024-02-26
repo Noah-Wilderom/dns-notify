@@ -47,9 +47,9 @@ func main() {
 	}
 }
 
-func ping(host string) bool {
-	if !strings.HasPrefix(host, "https://") && !strings.HasPrefix(host, "http://") {
-		host = fmt.Sprintf("https://%s", host)
+func ping(url string) bool {
+	if !strings.HasPrefix(url, "https://") && !strings.HasPrefix(url, "http://") {
+		url = fmt.Sprintf("https://%s", url)
 	}
 
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
@@ -57,7 +57,7 @@ func ping(host string) bool {
 
 	client := &http.Client{}
 
-	req, err := http.NewRequestWithContext(ctx, "GET", host, nil)
+	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
 		return false
 	}
